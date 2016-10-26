@@ -25,7 +25,7 @@ module Nunes
         when "commit"
           timing "active_record.sql.transaction_commit", runtime
         else
-          timing "active_record.sql.#{operation}", runtime
+          timing "active_record.sql", runtime, { :tags => ["sql_operation:#{operation}"] }
         end
       end
     end

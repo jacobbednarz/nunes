@@ -23,24 +23,17 @@ module Nunes
 
       # Private: Sends timing information about identifier event.
       def instrument_identifier(kind, identifier, start, ending)
+        view_path = identifier.to_s.gsub(::Rails.root.to_s, "")
+        sanitised_view_path = adapter.prepare(view_path, FileSeparatorReplacement)
+
         if identifier
           runtime = ((ending - start) * 1_000).round
-          timing identifier_to_metric(kind, identifier), runtime
+          timing "action_view.#{kind}", runtime, { :tags => ["view_path:#{sanitised_view_path}"]}
         end
       end
 
       # Private: What to replace file separators with.
       FileSeparatorReplacement = "_"
-
-      # Private: Converts an identifier to a metric name. Strips out the rails
-      # root from the full path.
-      #
-      # identifier - The String full path to the template or partial.
-      def identifier_to_metric(kind, identifier)
-        view_path = identifier.to_s.gsub(::Rails.root.to_s, "")
-        metric = adapter.prepare(view_path, FileSeparatorReplacement)
-        "action_view.#{kind}.#{metric}"
-      end
     end
   end
 end

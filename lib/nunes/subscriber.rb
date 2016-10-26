@@ -47,8 +47,8 @@ module Nunes
     # value - The Integer value to increment by.
     #
     # Returns nothing.
-    def increment(metric, value = 1)
-      @adapter.increment metric, value
+    def increment(metric, options = {})
+      @adapter.increment metric, options
     end
 
     # Internal: Track the timing of a metric for the client.
@@ -57,8 +57,8 @@ module Nunes
     # value - The Integer duration of the event in milliseconds.
     #
     # Returns nothing.
-    def timing(metric, value)
-      @adapter.timing metric, value
+    def timing(metric, value, options = {})
+      @adapter.timing metric, value, options
     end
   end
 end

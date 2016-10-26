@@ -41,14 +41,14 @@ module Nunes
 
     # Internal: Increment a metric by a value. Override in subclass if client
     # interface does not match.
-    def increment(metric, value = 1)
-      @client.increment prepare(metric), value
+    def increment(metric, options = {})
+      @client.increment prepare(metric), options
     end
 
     # Internal: Record a metric's duration. Override in subclass if client
     # interface does not match.
-    def timing(metric, duration)
-      @client.timing prepare(metric), duration
+    def timing(metric, duration, options = {})
+      @client.timing prepare(metric), duration, options
     end
 
     # Private: What Ruby uses to separate namespaces.

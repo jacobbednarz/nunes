@@ -16,7 +16,7 @@ module Nunes
         mailer = payload[:mailer]
 
         if mailer
-          timing "action_mailer.deliver.#{mailer}", runtime
+          timing "action_mailer.deliver", runtime, { :tags => ["mailer_name:#{mailer}"] }
         end
       end
 
@@ -25,7 +25,7 @@ module Nunes
         mailer = payload[:mailer]
 
         if mailer
-          timing "action_mailer.receive.#{mailer}", runtime
+          timing "action_mailer.receive", runtime, { :tags => ["mailer_name:#{mailer}"] }
         end
       end
     end
