@@ -1,3 +1,7 @@
+# Note: This is a fork that is specifically targetting Datadog integration and probably won't work with a vanilla statsd client.
+
+---
+
 # nunes
 
 The friendly gem that instruments everything for you, like I would if I could.
